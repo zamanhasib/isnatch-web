@@ -9,7 +9,7 @@ export default function About() {
           We are here in a mission to build next generation cashback system
           <br></br>
           <br></br>For You
-          <br></br>Yes, World Wide!
+          <br></br>Yes, World Wide! 
         </p>
       </main>
     </div>
