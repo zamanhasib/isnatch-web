@@ -19,7 +19,7 @@ export default function Home({
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to iSnatch!</h1>
 
-        <p className={styles.description}>Get ready to snatch cash back :)</p>
+        <p className={styles.description}>Get ready to snatch cash back :-)</p>
         <ul>
           {categories.map(({ code, name }) => (
             <li key={code}>{name}</li>
