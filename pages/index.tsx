@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Get ready to snatch cash back :) 
+          Get ready to snatch cash back 
         </p>
 
         
