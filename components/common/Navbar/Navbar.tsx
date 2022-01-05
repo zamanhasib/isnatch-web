@@ -25,7 +25,8 @@ export default function Navbar() {
             </Menu.Item>
             {categories.map((item, index) => (
               <Menu.Item key={item.code}>
-                <Link 
+                <Link
+                  key={item._id} 
                   href={{
                     pathname: '/category/[category]',
                     query: { category: item._id },

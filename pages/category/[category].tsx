@@ -18,6 +18,7 @@ export default function CategoryPage({
         <Row gutter={16}>
           {cat.items.map((item: Item) => (
             <Link 
+              key={item._id}
               href={{
                 pathname: '/item/[item]',
                 query: { item: item._id },

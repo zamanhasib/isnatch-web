@@ -19,6 +19,7 @@ export default function Home({
         <Row gutter={16}>
           {categories.map((category: Category) => (
             <Link 
+              key={category._id}
               href={{
                 pathname: '/category/[category]',
                 query: { category: category._id },
