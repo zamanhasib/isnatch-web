@@ -3,11 +3,9 @@ import Link from "next/link";
 import { getCategories } from "services/rewards";
 import { Button, Menu } from 'antd';
 import { Category } from "types/category";
-const initialValue: {
-  code: string;
-  name: string;
-  sequence: string;
-}[] = [];
+
+const initialValue: Category[] = [];
+
 export default function Navbar() {
   const [categories, setCategories] = useState(initialValue);
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function Navbar() {
                 <Link 
                   href={{
                     pathname: '/category/[category]',
-                    query: { category: item.code },
+                    query: { category: item._id },
                   }}
                 >
                   <a>{item.name}</a>

@@ -1,6 +1,9 @@
+import { Item } from "./item";
+
 export type Category = {
-    id: string
-    name: string
-    slug: string
-    path: string
-  }
+  _id: string;
+  code: string;
+  name: string;
+  sequence: string;
+  items: any[];
+}
