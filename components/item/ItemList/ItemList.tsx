@@ -1,11 +1,17 @@
 import { List } from "antd";
+import { SubItem } from "types/item";
 
-export default function ItemList({subItems}) {
+type ItemListProps = {
+  subItems: SubItem[];
+  
+}
+
+export default function ItemList({subItems}: ItemListProps) {
   return (
     <List
       size="large"
       dataSource={subItems}
-      renderItem={item => <List.Item>{item}</List.Item>}
+      renderItem={item => <List.Item>{item.name}</List.Item>}
     />
   );
 }
