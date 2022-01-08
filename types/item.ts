@@ -3,6 +3,9 @@ export type Item = {
     name: string;
     cashback: string;
     subItems: SubItem[];
+    redeemAt: string;
+    redeemBy: Date;
+    instructions: string[];
 }
 
 export type SubItem = {
@@ -10,4 +13,14 @@ export type SubItem = {
     name: string;
     price: number;
     description: string;
+    count?: number;
+    total?: number;
+}
+
+export type CartItem = {
+    code: string;
+    name: string;
+    count: number;
+    price: number;
+    total: number;
 }
