@@ -14,9 +14,9 @@ export default function Home({
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to iSnatch!</h1>
 
-        <p className={styles.description}>Get ready to snatch cash back :-)</p>
+        <p className={styles.description}>Get ready to snatch cash back</p>
 
-        <Row gutter={16}>
+        <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
           {categories.map((category: Category) => (
             <Link 
               key={category._id}
@@ -25,8 +25,8 @@ export default function Home({
                 query: { category: category._id },
               }}
             >
-              <Col span={8}>
-                <Card className={styles.card} title={category.name}>
+              <Col className="gutter-row" span={8}>
+                <Card hoverable={true} title={category.name}>
                   {category.items.length} offers available
                 </Card>
               </Col>

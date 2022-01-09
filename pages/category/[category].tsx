@@ -15,7 +15,7 @@ export default function CategoryPage({
     <div className={styles.container}>
       <main className={styles.main}>
         <p className={styles.description}>{cat.name} offers to get cashback</p>
-        <Row gutter={16}>
+        <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
           {cat.items.map((item: Item) => (
             <Link 
               key={item._id}
@@ -24,8 +24,8 @@ export default function CategoryPage({
                 query: { item: item._id },
               }}
             >
-              <Col span={8}>
-                <Card className={styles.card} title={item.name}>
+              <Col className="gutter-row" span={8}>
+                <Card hoverable={true} title={item.name}>
                   {item.cashback}% cashback
                 </Card>
               </Col>

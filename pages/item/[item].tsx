@@ -2,14 +2,19 @@ import { Layout } from "@components/common";
 import styles from "../../styles/Home.module.css";
 import { InferGetStaticPropsType } from "next";
 import { CartItem, Item, SubItem } from "types/item";
-import { getItem } from "services/rewards";
+import { getCustomer, getItem, savePayment } from "services/rewards";
 import { Card, Col, Row, Space } from "antd";
-import { ItemList, Comments, ItemCart } from "@components/item";
+import { ItemList, Comments, ItemCart, PaymentCard } from "@components/item";
 import { useState } from "react";
+import { Payment } from "types/payment";
+import CONSTANTS from "@config/constants";
+import { Customer } from "types/customer";
 export default function ItemPage({
-  item,
+  item, customer
 }: InferGetStaticPropsType<typeof getServerSideProps>) {
   const selectedItem: Item = item;
+  const activeCustomer: Customer = customer;
+  
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   function updateCart(newItemCode: string) {
@@ -48,6 +53,13 @@ export default function ItemPage({
       items.splice(index, 1);
     }
     setCartItems([...items]);
+  }
+
+  async function proceedToPayment(payment: Payment){
+    const output = await savePayment(payment);
+    if (output) {
+      alert("your payment is successful");
+    }
   }
 
   return (
@@ -91,6 +103,9 @@ export default function ItemPage({
                     <Card title="Cart" className={styles.itemCard}>
                         <ItemCart cartItems={cartItems} addItem={addSubItem} minusItem={minusSubItem}></ItemCart>
                     </Card> 
+                    <Card title="Payment" className={styles.itemCard}>
+                      <PaymentCard customer={activeCustomer} item={selectedItem} cartItems={cartItems} proceedToPayment={proceedToPayment}></PaymentCard>
+                    </Card>
                     <Card title="Other Similar Offers" className={styles.itemCard}>
                         coming soon
                     </Card>  
@@ -107,16 +122,21 @@ ItemPage.Layout = Layout;
 export async function getServerSideProps(context: {
   params: { item: string };
 }) {
+
   const itemId = context.params.item;
   const item = await getItem(itemId);
-  if (!item) {
+
+  const customerId = CONSTANTS.DEFAULT_CUSTOMER_ID;
+  const customer = await getCustomer(customerId);
+
+  if (!item || !customer) {
     return {
       notFound: true,
     };
   }
 
   return {
-    props: { item },
+    props: { item, customer },
   };
 }
 

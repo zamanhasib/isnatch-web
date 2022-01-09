@@ -1,31 +1,23 @@
-import axios from "axios";
-import url from "../config/url";
-const apiURL =
-  process.env.NODE_ENV === "production" ? url.PROD_API_URL : url.DEV_API_URL;
+import { Payment } from "types/payment";
+import { getObjectById, getObjects, saveObject } from "./common";
+
 
 export async function getCategories(){
-    try {
-        const response = await axios.get(apiURL + "categories/");
-        return response.data;
-    } catch (error) {
-        return [];
-    }
+    return await getObjects("categories");
 };
 
 export async function getCategory(categoryId: string){
-    try {
-        const response = await fetch(apiURL + "categories/" + categoryId);
-        return response.json();
-    } catch (error) {
-        return {};
-    }
+    return await getObjectById(categoryId, "categories");
 };
 
 export async function getItem(itemId: string){
-    try {
-        const response = await axios.get(apiURL + "items/" + itemId);
-        return response.data;
-    } catch (error) {
-        return {};
-    }
+    return await getObjectById(itemId, "items");
 };
+
+export async function getCustomer(itemId: string){
+    return await getObjectById(itemId, "customers");
+};
+
+export async function savePayment(object: Payment) {
+    return await saveObject(object, "sales");
+}
