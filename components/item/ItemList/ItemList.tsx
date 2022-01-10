@@ -19,6 +19,7 @@ export default function ItemList(props: any) {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
+      responsive: ["xs","sm"]
     },
     {
       title: 'Price',
@@ -32,6 +33,7 @@ export default function ItemList(props: any) {
       render: (text:any, record:any) => (
         <Button type="primary" onClick={e => handleUpdateCart(record)}>Add</Button>
       ),
+      responsive: ["xs","sm"]
     },
   ].filter(item => !item.hidden);;
 

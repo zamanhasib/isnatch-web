@@ -3,18 +3,20 @@ import styles from "../../styles/Home.module.css";
 import { InferGetStaticPropsType } from "next";
 import { CartItem, Item, SubItem } from "types/item";
 import { getCustomer, getItem, savePayment } from "services/rewards";
-import { Card, Col, Row, Space } from "antd";
+import { Card, Col, message, Row, Space } from "antd";
 import { ItemList, Comments, ItemCart, PaymentCard } from "@components/item";
 import { useState } from "react";
 import { Payment } from "types/payment";
 import CONSTANTS from "@config/constants";
 import { Customer } from "types/customer";
+import { useRouter } from 'next/router'
+
 export default function ItemPage({
   item, customer
 }: InferGetStaticPropsType<typeof getServerSideProps>) {
   const selectedItem: Item = item;
   const activeCustomer: Customer = customer;
-  
+  const router = useRouter();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   function updateCart(newItemCode: string) {
@@ -58,7 +60,8 @@ export default function ItemPage({
   async function proceedToPayment(payment: Payment){
     const output = await savePayment(payment);
     if (output) {
-      alert("your payment is successful");
+      message.success('Your payment is successful, enjoy your cashback $' + payment.cashbackSnatched.toFixed(2), 10);
+      router.push("/");
     }
   }
 

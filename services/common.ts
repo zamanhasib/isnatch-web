@@ -24,7 +24,6 @@ export async function getObjects(controller: string){
 export async function saveObject(object: any, controller: string){
     try {
         const response = await axios.post(apiURL + controller + "/", object);
-        console.log(response);
         return response.data;
     } catch (error) {
         return null;
