@@ -10,7 +10,7 @@ import CONSTANTS from "@config/constants";
 
 export default function Home({
   categories,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetStaticPropsType<typeof getServerSideProps>) {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -41,7 +41,7 @@ export default function Home({
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const categories = await getCategories();
   return { props: { categories } };
 };
